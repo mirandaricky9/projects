@@ -47,5 +47,7 @@ if __name__ == "__main__":
 
     # Setting the length and width of the calculator
     gui.geometry("300x300")
+
+    # gui.
     
     pass
