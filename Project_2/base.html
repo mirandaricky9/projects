@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Jekyll v4.0.1">
+    </head>
+
+    <body>
+        <form name="myForm" action="" method="GET">
+            <label for="itemName">Item Name:</label><br>
+            <input type="text" id="itemName" name="itemName"><br>
+            <input type="button" name="button" value="Search" onClick="fetchItem(this.form)">
+        </form>
+
+        <script>
+        function fetchItem (form){
+            var itemName = form.inputbox.value;
+            fetch('https://api.tarkov.dev/graphql', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                },
+                body: JSON.stringify({query: `{
+                  items(name: itemName) {
+                      id
+                      name
+                      shortName
+                  }
+              }`})
+              })
+                .then(r => r.json())
+                .then(data => console.log('data returned:', data));
+        }
+        </script>
+        
+    </body>
+
+</html>
